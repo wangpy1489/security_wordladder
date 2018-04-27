@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <title>Welcome Page</title>
+</head>
+<body>
+<!--从上下文中获取name属性并填写到p标签中-->
+<p th:text="'hello, '+${name}+'! 请输入单词：'">hello! my new friend!</p>
+<input id="start" type="text"  placeholder="start" />
+<input id="end" type="text" placeholder="end" />
+<button id="btn_submit" class="btn btn-lg btn-primary btn-block" type="button">提交</button>
+</body>
+</html>
+
+<script type="text/javascript">
+    (function($){
+        $.getUrlParam = function(name){
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r!=null) return unescape(r[2]); return null;
+        }})(jQuery);
+    $('#btn_submit').click(function(){
+        var start = $("#start").val();
+        var end = $("#end").val();
+        $.ajax({
+            type: 'GET',
+            url: "http://localhost:8080/solver/?access_token="+$.getUrlParam("access_token")+"&begin="+start+"&end="+end,
+            success: function (data) {
+                    alert(data);
+
+            }
+        });
+    });
+
+</script>

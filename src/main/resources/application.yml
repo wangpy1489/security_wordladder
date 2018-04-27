@@ -1,0 +1,12 @@
+server:
+  port: 8080
+spring:
+    thymeleaf:
+      cache: false
+      prefix: classpath:/templates/
+      suffix: .html
+      encoding: UTF-8
+      check-template-location: true
+      servlet:
+        content-type: text/html
+logging.level.org.springframework.security: DEBUG
